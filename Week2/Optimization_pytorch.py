@@ -19,3 +19,12 @@ class Data(Dataset):
         
     def __len__(self):
         return self.len
+    
+    
+class Model(nn.Module):
+    def __init__(self, in_size, out_size):
+        super(Model,self).__init__()
+        self.lr = nn.Linear(in_size, out_size)
+        
+    def forward(self, x):
+        return self.lr(x)
