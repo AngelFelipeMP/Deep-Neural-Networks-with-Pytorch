@@ -1,6 +1,5 @@
 import torch
 from torch.utils.data import Dataset, DataLoader
-# from SGD_plus_Dataset_DataLoader import forward, criterion, Data
 import numpy as np
 import matplotlib.pyplot as plt
 
