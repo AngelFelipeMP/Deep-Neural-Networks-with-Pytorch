@@ -72,9 +72,6 @@ if '__main__' == __name__:
     epoch5, LOSS5 = training(trainloader=trainloader5)
     epoch20, LOSS20 = training(trainloader=trainloader20)
     
-    print(LOSS5)
-    print(LOSS20)
-
     # Loss plot
     plt.plot(epoch5,LOSS5, label="Batch size = 5")
     plt.plot(epoch20,LOSS20, label="Batch size = 20")
