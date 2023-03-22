@@ -1,6 +1,7 @@
 import torch
 from torch import nn, optim
 from torch.utils.data import Dataset, DataLoader
+from matplotlib import pyplot as plt
 
 class MLR(nn.Module):
     def __init__(self, input_size, output_size):
@@ -35,6 +36,8 @@ class Data2D(Dataset):
 
 def traing_loop(dataloader, model, loss, optimizer, epochs):
     
+    loss_list = []
+    
     for epoch in range(epochs):
         epoch_loss = 0
         for x,y in dataloader:
@@ -46,8 +49,12 @@ def traing_loop(dataloader, model, loss, optimizer, epochs):
             
             epoch_loss =+ loss.item()
             
+        loss_list.append(epoch_loss/len(dataloader))
+            
         if epoch % 10 == 0:
             print('Epoch: ', epoch, 'Loss: ', epoch_loss/len(dataloader))
+            
+    return loss_list
 
 if __name__ == '__main__':
     torch.manual_seed(7)
@@ -57,4 +64,10 @@ if __name__ == '__main__':
     criterion = nn.MSELoss()
     optimizer = optim.SGD(model.parameters(), lr=0.001)
     
-    traing_loop(TrainLoader, model, criterion, optimizer, 100)
+    loss = traing_loop(TrainLoader, model, criterion, optimizer, 100)
+    
+    
+    plt.plot(range(len(loss)), loss)
+    plt.xlabel("Epochs")
+    plt.ylabel("Loss")
+    plt.show()
